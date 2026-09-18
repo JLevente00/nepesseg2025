@@ -17,6 +17,37 @@ with open("lakossag_2025.csv", "r", encoding="utf-8") as forras:
                 }
             )
 
+def varosok_kiirasa(varosnevek):
+    print("-------------------")
+    if len(varosnevek) < 36:
+        for i in range(len(varosnevek)):
+            print(varosnevek[i], end=", ")
+    else:
+        for i in range(4):
+            for j in range(9):
+                print(varosnevek[0], end=", ")
+                varosnevek.pop(0)
+
+    if len(varosnevek) == 0:
+        print("Nincs több város a listában.")
+        print("Vissza szeretne térni a menübe vagy kilépni a programból? \n [1]-Menü \n [2]-Kilépés a programból")
+        masodik_valasz_2 = msvcrt.getch().decode("utf-8")
+        if masodik_valasz_2 == "1":
+            return menu()
+        elif masodik_valasz_2 == "2":
+            print("Kilépés a programból...")
+    print(" \n -------------------")
+    print("Megtaláltad amit kerestél? \n [1]-Igen, kilépés a menübe \n [2]-Nem, folytatom a keresést \n [3]-Igen, kilépés a programból \n [4]-Kilépés a programból")
+    masikopció_valasz = msvcrt.getch().decode("utf-8")
+    if masikopció_valasz == "1": 
+        return menu()
+    elif masikopció_valasz == "2":
+            return varosok_kiirasa(varosnevek)
+    elif masikopció_valasz == "3":
+        print("Kilépés a programból...")
+    elif masikopció_valasz == "4":
+        print("Kilépés a programból...")
+
 def menu_1():
             print(" Adja meg a megyekódot: ")
             megyekod = "" 
@@ -124,5 +155,29 @@ if valasz == "Fővárosi kerület":
      for a in adatok:
           if a["tipus"] == "fővárosi kerület":
                varosnevek.append(a["telepules"])
-               
-
+     varosok_kiirasa(varosnevek)
+elif valasz == "Vármegyei jogú város":
+     for a in adatok:
+          if a["tipus"] == "vármegyei jogú város":
+               varosnevek.append(a["telepules"])
+     varosok_kiirasa(varosnevek)
+elif valasz == "Vármegyeszékhely":
+     for a in adatok:
+          if a["tipus"] == "vármegyeszékhely":
+               varosnevek.append(a["telepules"])
+     varosok_kiirasa(varosnevek)
+elif valasz == "Város":
+        for a in adatok:
+            if a["tipus"] == "város":
+                varosnevek.append(a["telepules"])
+        varosok_kiirasa(varosnevek)
+elif valasz == "Község":
+        for a in adatok:
+            if a["tipus"] == "község":
+                varosnevek.append(a["telepules"])
+        varosok_kiirasa(varosnevek)
+elif valasz == "Nagyközség":
+        for a in adatok:
+            if a["tipus"] == "nagyközség":
+                varosnevek.append(a["telepules"])
+        varosok_kiirasa(varosnevek)
